@@ -79,7 +79,7 @@ We are now inside the container shell which is easily visible by the prefix 'Sin
 
 We change to
 
-`cd ${HOME}/dev/codeaster/src/code_aster`
+`cd dev/codeaster/src/code_aster`
 
 Inside Salome-Meca, we need an info about the installed version of Code_Aster, therefore we
 
