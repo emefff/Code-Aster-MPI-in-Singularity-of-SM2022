@@ -15,15 +15,17 @@ Compared to our old recipe (there we downloaded a .zip of CA source code), this 
 This recipe and the resulting container were tested in Ubuntu 22.04 LTS. Please be aware, that some slight modifications might be necessary when using Ubuntu 22.04LTS (see Code_Aster forum https://code-aster.org/V2/spip.php?rubrique2 for these known issues).
 ________________________________________________________________________________________________________
 
-If you do not have singularity installed, follow the instructions here:
+If you do not have singularity installed, the easiest way is to install a .deb package (for Ubuntu 22.04 this is the 'jammy'-package, although we used an older version here, see below):
+
+https://github.com/sylabs/singularity/releases
+
+If you want to compile singularity yourself follow the instructions here:
 
 https://github.com/sylabs/singularity/blob/main/INSTALL.md
 
 or here
 
 https://docs.sylabs.io/guides/3.0/user-guide/installation.html#install-on-linux
-
-(Note: installing from Ubuntu package currently does not work due to erroneous key-server)
 
 To check the installed version 
 
