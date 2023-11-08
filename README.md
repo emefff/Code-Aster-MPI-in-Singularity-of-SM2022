@@ -35,7 +35,7 @@ Download the necessary Singularity Container of Salome-Meca 2022 with
 wget -c https://www.code-aster.org/FICHIERS/singularity/salome_meca-lgpl-2022.1.0-1-20221225-scibian-9.sif
 ```
 
-and place it in your home folder ~/ (also $HOME). The file size should be approx. 6.2GB. 
+and place it in your home folder ${HOME} (also ~/ or $HOME). The file size should be approx. 6.2GB. 
 
 Alternatively, the container can be downloaded directly from the page https://code-aster.org/V2/spip.php?article303, however, we recommend using wget -c.
 
@@ -75,15 +75,15 @@ The whole building process should run well, we may remove the overlay.img
 rm overlay.img
 ```
 
-We are still in our $HOME directory (also ~/ or home/$USER).
+We are still in our ${HOME} directory.
 ________________________________________________________________________________________________________
-Now the fun part begins. First we need to bind our $HOME directory to the now larger container and enter the container shell with
+Now the fun part begins. First we need to bind our ${HOME} directory to the now larger container and enter the container shell with
 
 ```
 sudo singularity run --bind ${HOME}:${HOME} -w ${HOME}/salome_meca-lgpl-2022.1.0-1-20221225-scibian-9.sif shell`
 ```
 
-We are now inside the container shell which is easily visible by the prefix 'Singularity> '. Our current directory is still the ${HOME} of our user, be aware we are ***root*** now (we used sudo).
+We are now inside the container shell which is easily visible by the prefix 'Singularity> ' (for clarity we leave the prefix in the appropriate code also). Our current directory is still the ${HOME} of our user, be aware we are ***root*** now (we used sudo).
 
 ![Bildschirmfoto vom 2023-11-08 14-16-02](https://github.com/emefff/Code-Aster-MPI-in-Singularity-of-SM2022/assets/89903493/702dae4a-771c-40fa-a5ef-fa39c2723ed4)
 
