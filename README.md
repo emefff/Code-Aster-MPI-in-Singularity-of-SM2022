@@ -40,12 +40,12 @@ Now we will download the Code_Aster repository from Gitlab. Some of the below in
 
 First we will create a folder for the Code_Aster repository with
 
-`mkdir -p $HOME/dev/codeaster`
+`mkdir -p ${HOME}/dev/codeaster`
 
 We clone the whole repository with
 
 ```
-cd $HOME/dev/codeaster
+cd ${HOME}/dev/codeaster
 
 git clone https://gitlab.com/codeaster/src.git
 
@@ -69,9 +69,9 @@ The whole building process should run well, we may remove the overlay.img
 
 We are still in our $HOME directory.
 ________________________________________________________________________________________________________
-Now the fun part starts. First we need to bind our $HOME directory to the now larger container and enter the container shell with
+Now the fun part begins. First we need to bind our $HOME directory to the now larger container and enter the container shell with
 
-`sudo singularity run --bind $HOME:$HOME -w salome_meca-lgpl-2022.1.0-1-20221225-scibian-9.sif shell`
+`sudo singularity run --bind ${HOME}:${HOME} -w ${HOME}/salome_meca-lgpl-2022.1.0-1-20221225-scibian-9.sif shell`
 
 We are now inside the container shell which is easily visible by the prefix 'Singularity> '
 
@@ -79,7 +79,7 @@ We are now inside the container shell which is easily visible by the prefix 'Sin
 
 We change to
 
-`cd dev/codeaster/src/code_aster`
+`cd ${HOME}/dev/codeaster/src/code_aster`
 
 Inside Salome-Meca, we need an info about the installed version of Code_Aster, therefore we
 
@@ -95,7 +95,8 @@ Note: modify as needed, if you install a different version etc.
 The following lines build Code_Aster in the container. Do not just copy with the button, execute them in succession, one by one in the container shell.
 If you get any errors, make sure you did not forget any of the previous steps.
 
-The git checkout command is very handy, basically, at this step we choose the version we want. It could be a different version also, though make sure your Code_Aster version still matches the container's version. Note: 
+The git checkout command is very handy, basically at this step we choose the version we want. It could be a different version also, though make sure your Code_Aster version still matches the container's version.
+
 
 ```
 cd ${HOME}/dev/codeaster/src
@@ -116,6 +117,7 @@ echo "vers : testing_mpi:/opt/salome_meca/V2022.1.0_scibian_univ/tools/Code_aste
 
 exit
 ```
+
 We are now in our normal Linux shell, outside the container. 
 
 This is it, the container may be launched in the usual way (if you didn't prepare a symlink) with 
@@ -130,7 +132,7 @@ or if you do not have a Nvidia GPU
 
 `./salome_meca-lgpl-2022.1.0-1-20221225-scibian-9.sif --soft`
 
-Alternatively, you can enter the container shell with
+Alternatively, you can also enter the container shell with
 
 `./salome_meca-lgpl-2022.1.0-1-20221225-scibian-9.sif --shell`
 
