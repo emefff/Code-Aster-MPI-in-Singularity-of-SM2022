@@ -49,7 +49,31 @@ cd $HOME/dev/codeaster
 git clone https://gitlab.com/codeaster/src.git
 git clone https://gitlab.com/codeaster/devtools.git
 ```
-This could take`
+________________________________________________________________________________________________________
+Again, we need to create an overlay to the container, because we need space for additional data. This time, we need a little more space
+
+```
+cd $HOME
+dd if=/dev/zero of=overlay.img bs=1M count=1500 && mkfs.ext3 overlay.img
+singularity sif add --datatype 4 --partfs 2 --parttype 4 --partarch 2 --groupid 1 salome_meca-lgpl-2022.1.0-1-20221225-scibian-9.sif overlay.img
+```
+Check the filesize of the container, it should now be approx. 7.7 (that's the 6.2GB+1.5GB)
+
+The whole building process should run well, we may remove the overlay.img
+
+`rm overlay.img`
+
+We are still in our $HOME directory.
+________________________________________________________________________________________________________
+Now the fun part starts. First we need to bind our $HOME directory to the now larger container with
+
+`sudo singularity run --bind $HOME:$HOME -w $HOME/salome_meca-lgpl-2022.1.0-1-20221225-scibian-9.sif shell`
+
+We change to
+
+`cd $HOME/dev/codeaster/src/code_aster`
+
+
 
 
 
