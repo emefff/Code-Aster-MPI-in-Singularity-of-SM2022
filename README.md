@@ -15,18 +15,23 @@ Compared to our old recipe (there we downloaded a .zip of CA source code), this 
 This recipe and the resulting container were tested in Ubuntu 22.04 LTS. Please be aware, that some slight modifications might be necessary when using Ubuntu 22.04LTS (see Code_Aster forum https://code-aster.org/V2/spip.php?rubrique2 for these known issues).
 ________________________________________________________________________________________________________
 
-If you do not have singularity installed, the version coming with Ubuntu 22.04LTS is fine.
-```
-sudo apt-get install singularity
-```
+If you do not have singularity installed, follow the instructions here:
+
+https://github.com/sylabs/singularity/blob/main/INSTALL.md
+
+or here
+
+https://docs.sylabs.io/guides/3.0/user-guide/installation.html#install-on-linux
+
+(Note: installing from Ubuntu package currently does not work due to erroneous key-server)
+
 To check the installed version 
 
 ```
 singularity --version
 ```
 
-The version used here was 'singularity-ce version 3.10.3-focal', the 'focal' hints it is the version provided by Ubuntu repositories.
-If you want to compile singularity yourself, please refer to https://github.com/sylabs/singularity/blob/main/INSTALL.md.
+The version used here was 'singularity-ce version 3.10.3-focal'.
 
 ________________________________________________________________________________________________________
 Download the necessary Singularity Container of Salome-Meca 2022 with 
@@ -95,25 +100,25 @@ Singularity> cd dev/codeaster/src/code_aster
 
 Be careful, as we are ***root*** inside the container, the ${HOME} is not your /home/$USER directory anymore.
 
-Inside Salome-Meca, we need an info about the installed version of Code_Aster, therefore we
+Inside Salome-Meca, we need information about the installed version of Code_Aster, therefore we create and edit the following file
 
 ```
 Singularity> nano pkginfo.py
 ```
 
-Inside nano, we type or copy-paste
+Inside nano, we type or copy-paste below text
 
 ```
 pkginfo = [(16, 4, 0), 'n/a', 'n/a', '08/11/2023', 'n/a', 1, ['no source repository']]`
 ```
 
-and save this file (CTRL+O and ENTER, this nano is in french 😊).
+and save this file (CTRL+O and ENTER, this nano speaks french 😊).
 Note: modify as needed, if you install a different version etc.
 
 The following lines build Code_Aster in the container. Do not just copy with the button, execute them in succession, one by one in the container shell.
 If you get any errors, make sure you did not forget any of the previous steps. 
 
-The cd command brings us into /home/$USER/dev/codeaster/src. Be careful, we cannot just type 'cd $USER/dev/codeaster/src' because we are ***root***.
+The cd command brings us into /home/$USER/dev/codeaster/src. Be careful, we cannot just type 'cd $USER/dev/codeaster/src' because we are ***root***. 
 The git checkout command is very handy, basically at this step we choose the version we want. It could be a different version also, though make sure your Code_Aster version still matches the container's version.
 The other command should not create problems. Use a larger number of cores (e.g. jobs=8) to your liking.
 
