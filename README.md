@@ -83,7 +83,7 @@ Now the fun part begins. First we need to bind our $HOME directory to the now la
 sudo singularity run --bind ${HOME}:${HOME} -w ${HOME}/salome_meca-lgpl-2022.1.0-1-20221225-scibian-9.sif shell`
 ```
 
-We are now inside the container shell which is easily visible by the prefix 'Singularity> '. OR current directory is still the ${HOME} of or user, be aware we are ROOT now.
+We are now inside the container shell which is easily visible by the prefix 'Singularity> '. Our current directory is still the ${HOME} of our user, be aware we are ***root*** now (we used sudo).
 
 ![Bildschirmfoto vom 2023-11-08 14-16-02](https://github.com/emefff/Code-Aster-MPI-in-Singularity-of-SM2022/assets/89903493/702dae4a-771c-40fa-a5ef-fa39c2723ed4)
 
@@ -113,9 +113,9 @@ Note: modify as needed, if you install a different version etc.
 The following lines build Code_Aster in the container. Do not just copy with the button, execute them in succession, one by one in the container shell.
 If you get any errors, make sure you did not forget any of the previous steps. 
 
-The cd command brings us into /home/$USER/dev/codeaster/src. Be careful, we cannot just type 'cd $USER/dev/codeaster/src' because we are ROOT.
+The cd command brings us into /home/$USER/dev/codeaster/src. Be careful, we cannot just type 'cd $USER/dev/codeaster/src' because we are ***root***.
 The git checkout command is very handy, basically at this step we choose the version we want. It could be a different version also, though make sure your Code_Aster version still matches the container's version.
-The other command should not create problems.
+The other command should not create problems. Use a larger number of cores (e.g. jobs=8) to your liking.
 
 ```
 cd ..
@@ -126,9 +126,9 @@ export TOOLS="/opt/salome_meca/V2022.1.0_scibian_univ/tools"
 
 export ASTER_TESTING="${TOOLS}/Code_aster_testing-1640"
 
-./waf_mpi configure --prefix=${ASTER_TESTING} --install-tests --jobs=8
+./waf_mpi configure --prefix=${ASTER_TESTING} --install-tests --jobs=4
 
-./waf_mpi build --jobs=8
+./waf_mpi build --jobs=4
 
 ./waf_mpi install
 
