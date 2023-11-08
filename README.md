@@ -16,13 +16,44 @@ This recipe and the resulting container were tested in Ubuntu 22.04 LTS. Please 
 ________________________________________________________________________________________________________
 
 If you do not have singularity installed, the version coming with Ubuntu 22.04LTS is fine.
-The version used here was 'singularity-ce version 3.10.3-focal', which is the version provided by Ubunt repositories.
+
+`sudo apt-get install singularity`
+
+To check the installed version 
+
+`singularity --version`
+
+The version used here was 'singularity-ce version 3.10.3-focal', the 'focal' hints it is the version provided by Ubuntu repositories.
 If you want to compile singularity yourself, please refer to https://github.com/sylabs/singularity/blob/main/INSTALL.md.
 
 ________________________________________________________________________________________________________
 Download the necessary Singularity Container of Salome-Meca 2022 with 
 
-wget -c https://www.code-aster.org/FICHIERS/singularity/salome_meca-lgpl-2022.1.0-1-20221225-scibian-9.sif
+`wget -c https://www.code-aster.org/FICHIERS/singularity/salome_meca-lgpl-2022.1.0-1-20221225-scibian-9.sif`
+
+and place it in your home folder ~/ (also $HOME). The file size should be approx. 6.2GB. 
+
+Alternatively, the container can be downloaded directly from the page https://code-aster.org/V2/spip.php?article303, however, we recommend using wget -c.
+
+________________________________________________________________________________________________________
+Now we will download the Code_Aster repository from Gitlab. Some of the below instructions can be found here: https://gitlab.com/codeaster-opensource-documentation/opensource-installation-development/-/blob/main/devel/compile.md#preparing-the-access-to-the-container but not all of them are necessary.
+
+First we will create a folder for the Code_Aster repository with
+
+`mkdir -p $HOME/dev/codeaster`
+
+We clone the whole repository with
+
+```
+cd $HOME/dev/codeaster
+git clone https://gitlab.com/codeaster/src.git
+git clone https://gitlab.com/codeaster/devtools.git
+```
+This could take`
+
+
+
+
 
 
 
