@@ -90,15 +90,15 @@ We are now inside the container shell which is easily visible by the prefix 'Sin
 We change to
 
 ```
-cd dev/codeaster/src/code_aster
+Singularity> cd dev/codeaster/src/code_aster
 ```
 
-Be careful, as we are ROOT inside the container, the ${HOME} is not your /home/$USER directory any more.
+Be careful, as we are ***root*** inside the container, the ${HOME} is not your /home/$USER directory anymore.
 
 Inside Salome-Meca, we need an info about the installed version of Code_Aster, therefore we
 
 ```
-nano pkginfo.py
+Singularity> nano pkginfo.py
 ```
 
 Inside nano, we type or copy-paste
@@ -118,28 +118,31 @@ The git checkout command is very handy, basically at this step we choose the ver
 The other command should not create problems. Use a larger number of cores (e.g. jobs=8) to your liking.
 
 ```
-cd ..
+Singularity> cd ..
 
-git checkout tags/16.4.0
+Singularity> git checkout tags/16.4.0
 
-export TOOLS="/opt/salome_meca/V2022.1.0_scibian_univ/tools"
+Singularity> export TOOLS="/opt/salome_meca/V2022.1.0_scibian_univ/tools"
 
-export ASTER_TESTING="${TOOLS}/Code_aster_testing-1640"
+Singularity> export ASTER_TESTING="${TOOLS}/Code_aster_testing-1640"
 
-./waf_mpi configure --prefix=${ASTER_TESTING} --install-tests --jobs=4
+Singularity> ./waf_mpi configure --prefix=${ASTER_TESTING} --install-tests --jobs=4
 
-./waf_mpi build --jobs=4
+Singularity> ./waf_mpi build --jobs=4
 
-./waf_mpi install
+Singularity> ./waf_mpi install
 
-echo "vers : testing_mpi:/opt/salome_meca/V2022.1.0_scibian_univ/tools/Code_aster_testing-1640/share/aster" >> ${TOOLS}/Code_aster_frontend-202200/etc/codeaster/aster
+Singularity> echo "vers : testing_mpi:/opt/salome_meca/V2022.1.0_scibian_univ/tools/Code_aster_testing-1640/share/aster" >> ${TOOLS}/Code_aster_frontend-202200/etc/codeaster/aster
 
-exit
+Singularity> exit
 ```
 
 We are now in our normal Linux shell, outside the container. 
 
-This is it, the build is complete. The container may be launched in the usual way (if you didn't prepare a symlink) with 
+This is it, the build is complete. In Asterstudy you'll find this MPI version in the 'Run Parameters' under 'testing_mpi (16.4.0)' which is exactly the text we told it to show above in the second-to-last line.
+
+
+The container may be launched in the usual way (if you didn't prepare a symlink) with 
 
 ```
 singularity run --app install salome_meca-lgpl-2022.1.0-1-20221225-scibian-9.sif
