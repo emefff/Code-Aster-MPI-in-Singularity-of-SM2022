@@ -1,5 +1,4 @@
 # Code-Aster-MPI-in-Singularity-of-SM2022
-How to build the MPI Version of Code Aster 16.4 inside the Singularity Container of Salome-Meca 2022 
 
 09.11.2023 Tested download of container + short test of downloaded container
 
