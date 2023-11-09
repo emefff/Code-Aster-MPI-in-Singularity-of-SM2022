@@ -33,7 +33,8 @@ To check the installed version
 singularity --version
 ```
 
-The version used here was 'singularity-ce version 3.10.3-focal'.
+The versions tested were 'singularity-ce version 3.10.3-focal' (also for the .sif in above link) and 'singularity-ce version 4.0.1-jammy'.
+Both versions work.
 
 ________________________________________________________________________________________________________
 Download the necessary Singularity Container of Salome-Meca 2022 with 
@@ -52,7 +53,7 @@ Now we will download the Code_Aster repository from Gitlab. Some of the below in
 First we will create a folder for the Code_Aster repository with
 
 ```
-mkdir -p ${HOME}/dev/codeaster`
+mkdir -p ${HOME}/dev/codeaster
 ```
 
 We clone the whole repository with
@@ -87,10 +88,10 @@ ________________________________________________________________________________
 Now the fun part begins. First we need to bind our ${HOME} directory to the now larger container and enter the container shell with
 
 ```
-sudo singularity run --bind ${HOME}:${HOME} -w ${HOME}/salome_meca-lgpl-2022.1.0-1-20221225-scibian-9.sif shell`
+sudo singularity run --bind ${HOME}:${HOME} -w ${HOME}/salome_meca-lgpl-2022.1.0-1-20221225-scibian-9.sif shell
 ```
 
-We are now inside the container shell which is easily visible by the prefix 'Singularity> ' (for clarity we leave the prefix in the appropriate code also). Our current directory is still the ${HOME} of our user, be aware we are ***root*** now (we used sudo).
+We are now inside the container shell which is easily visible by the prefix 'Singularity> ' (for clarity we leave the prefix in the appropriate code also). Our current directory is still the ${HOME} of our user, be aware we are ***root*** now (we used sudo). You can check your current directory any time with 'pwd'.
 
 ![Bildschirmfoto vom 2023-11-08 14-16-02](https://github.com/emefff/Code-Aster-MPI-in-Singularity-of-SM2022/assets/89903493/702dae4a-771c-40fa-a5ef-fa39c2723ed4)
 
@@ -111,7 +112,7 @@ Singularity> nano pkginfo.py
 Inside nano, we type or copy-paste below text
 
 ```
-pkginfo = [(16, 4, 0), 'n/a', 'n/a', '08/11/2023', 'n/a', 1, ['no source repository']]`
+pkginfo = [(16, 4, 0), 'n/a', 'n/a', '08/11/2023', 'n/a', 1, ['no source repository']]
 ```
 
 and save this file (CTRL+O and ENTER, this nano speaks french 😊).
