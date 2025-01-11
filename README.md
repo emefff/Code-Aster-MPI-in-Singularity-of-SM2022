@@ -21,7 +21,7 @@ In the description below we will choose Code_Aster 16.7 which is a stable versio
 This recipe and the resulting container were tested in Ubuntu 24.04 LTS. Please be aware, that some slight modifications might be necessary when using Ubuntu 24.04LTS (see Code_Aster forum https://code-aster.org/V2/spip.php?rubrique2 for these known minor issues).
 ________________________________________________________________________________________________________
 
-If you do not have singularity installed, the easiest way is to install a .deb package (for Ubuntu 24.04 this is the 'noble'-package, although we used an older version here, see below):
+If you do not have singularity installed, the easiest way is to install a .deb package (for Ubuntu 24.04 this is the 'noble'-package:
 
 https://github.com/sylabs/singularity/releases
 
