@@ -1,25 +1,27 @@
 # Code-Aster-MPI-in-Singularity-of-SM2022
 
+11.01.2025 Built CA stable 16.7 MPI version in container SM2022 on Ubuntu 24.04LTS. Some versions changed below.
+
 09.11.2023 Tested download of container + short test of downloaded container
 
 08.11.2023 Repository created
 
 ________________________________________________________________________________________________________
-Download container built according to below recipe at https://drive.google.com/file/d/1mywsQ_0xRCTm1uu1ivUgJWUyL0Imb6yf/view
+Download container built according to below recipe at (link to be posted)
 
 
 ________________________________________________________________________________________________________
 
-In the following tutorial we will show how to build the MPI Version of Code Aster 16.4 inside the Singularity Container of Salome-Meca 2022. Many thanks to forum member EnKiNekiDela, who describes very clearly how to build the MPI version in his own Github repository at https://github.com/bursica/Code_Aster-MPI-in-Singularity-of-SM2022. 
+In the following tutorial we will show how to build the MPI Version of Code Aster 16.7 inside the Singularity Container of Salome-Meca 2022. Many thanks to forum member EnKiNekiDela, who describes very clearly how to build the MPI version in his own Github repository at https://github.com/bursica/Code_Aster-MPI-in-Singularity-of-SM2022. 
 
 However, in the recipe below a slightly different approach is shown. Compared to our old recipe (there we downloaded a .zip of CA source code), this time we will download the Code_Aster Gitlab repository as a whole and choose the version in the code. Basically, this way we are able to even choose another version of Code_Aster (though with some restrictions regarding the chosen Salome-Meca .sif container. For info on which container to use for which CA version see https://gitlab.com/codeaster-opensource-documentation/opensource-installation-development/-/blob/main/devel/changelog.md). 
 
-In the description below we will choose Code_Aster 16.4 which is a testing, rather than a stable version. The latest stable version as of writing these lines is 15.6, which is quite close to 15.4 in the SM2021 repository (https://github.com/emefff/Code-Aster-MPI-in-Singularity-of-SM2021). A big thanks of course goes to EDF's R&D-Team, the developers of Salome-Meca and Code_Aster 👍. 
+In the description below we will choose Code_Aster 16.7 which is a stable version. As of now, it is the latest stable version. A big thanks of course goes to EDF's R&D-Team, the developers of Salome-Meca and Code_Aster 👍. 
 
-This recipe and the resulting container were tested in Ubuntu 22.04 LTS. Please be aware, that some slight modifications might be necessary when using Ubuntu 22.04LTS (see Code_Aster forum https://code-aster.org/V2/spip.php?rubrique2 for these known minor issues).
+This recipe and the resulting container were tested in Ubuntu 24.04 LTS. Please be aware, that some slight modifications might be necessary when using Ubuntu 24.04LTS (see Code_Aster forum https://code-aster.org/V2/spip.php?rubrique2 for these known minor issues).
 ________________________________________________________________________________________________________
 
-If you do not have singularity installed, the easiest way is to install a .deb package (for Ubuntu 22.04 this is the 'jammy'-package, although we used an older version here, see below):
+If you do not have singularity installed, the easiest way is to install a .deb package (for Ubuntu 24.04 this is the 'noble'-package, although we used an older version here, see below):
 
 https://github.com/sylabs/singularity/releases
 
@@ -37,8 +39,7 @@ To check the installed version
 singularity --version
 ```
 
-The versions tested were 'singularity-ce version 3.10.3-focal' (also for the .sif in above link) and 'singularity-ce version 4.0.1-jammy'.
-Both versions work.
+The versions tested were 'singularity-ce version 4.1.4-noble' (also for the .sif in above link).
 
 ________________________________________________________________________________________________________
 Download the necessary Singularity Container of Salome-Meca 2022 with 
@@ -75,11 +76,11 @@ Again, we need to create an overlay to the container, because we need space for 
 ```
 cd ${HOME}
 
-dd if=/dev/zero of=overlay.img bs=1M count=1500 && mkfs.ext3 overlay.img
+dd if=/dev/zero of=overlay.img bs=1M count=3000 && mkfs.ext3 overlay.img
 
 singularity sif add --datatype 4 --partfs 2 --parttype 4 --partarch 2 --groupid 1 salome_meca-lgpl-2022.1.0-1-20221225-scibian-9.sif overlay.img
 ```
-Check the filesize of the container, it should now be approx. 7.7 (that's the 6.2GB+1.5GB)
+Check the filesize of the container, it should now be approx. 9.3 (that's the 6.2GB+3.0GB)
 
 The whole building process should run well, we may remove the overlay.img
 
@@ -116,7 +117,7 @@ Singularity> nano pkginfo.py
 Inside nano, we type or copy-paste below text
 
 ```
-pkginfo = [(16, 4, 0), 'n/a', 'n/a', '08/11/2023', 'n/a', 1, ['no source repository']]
+pkginfo = [(16, 7, 0), 'n/a', 'n/a', '11/01/2025', 'n/a', 1, ['no source repository']]
 ```
 
 and save this file (CTRL+O and ENTER, this nano speaks french 😊).
@@ -132,11 +133,11 @@ The other command should not create problems. Use a larger number of cores (e.g.
 ```
 Singularity> cd ..
 
-Singularity> git checkout tags/16.4.0
+Singularity> git checkout tags/16.7.0
 
 Singularity> export TOOLS="/opt/salome_meca/V2022.1.0_scibian_univ/tools"
 
-Singularity> export ASTER_TESTING="${TOOLS}/Code_aster_testing-1640"
+Singularity> export ASTER_MPI="${TOOLS}/Code_aster_MPI-1670"
 
 Singularity> ./waf_mpi configure --prefix=${ASTER_TESTING} --install-tests --jobs=4
 
@@ -144,14 +145,14 @@ Singularity> ./waf_mpi build --jobs=4
 
 Singularity> ./waf_mpi install
 
-Singularity> echo "vers : testing_mpi:/opt/salome_meca/V2022.1.0_scibian_univ/tools/Code_aster_testing-1640/share/aster" >> ${TOOLS}/Code_aster_frontend-202200/etc/codeaster/aster
+Singularity> echo "vers : stable_mpi:/opt/salome_meca/V2022.1.0_scibian_univ/tools/Code_aster_MPI-1670/share/aster" >> ${TOOLS}/Code_aster_frontend-202200/etc/codeaster/aster
 
 Singularity> exit
 ```
 
 We are now in our normal Linux shell, outside the container. 
 
-This is it, the build is complete. In Asterstudy you'll find this MPI version in the 'Run Parameters' under 'testing_mpi (16.4.0)' which is exactly the text we told it to show above in the second-to-last line.
+This is it, the build is complete. In Asterstudy you'll find this MPI version in the 'Run Parameters' under 'stable_mpi (16.7.0)' which is exactly the text we told it to show above in the second-to-last line.
 
 
 The container may be launched in the usual way (if you didn't prepare a symlink) with 
