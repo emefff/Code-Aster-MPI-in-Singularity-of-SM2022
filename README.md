@@ -39,7 +39,7 @@ To check the installed version
 singularity --version
 ```
 
-The versions tested were 'singularity-ce version 4.1.4-noble' (also for the .sif in above link).
+The versions tested were 'singularity-ce version 4.1.4-noble' (also for the .sif in above link) and 4.2.2-noble (latest, as of writing this).
 
 ________________________________________________________________________________________________________
 Download the necessary Singularity Container of Salome-Meca 2022 with 
